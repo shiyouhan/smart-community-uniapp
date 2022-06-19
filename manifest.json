@@ -1,0 +1,127 @@
+{
+    "name" : "智慧社区",
+    "appid" : "__UNI__DA72A14",
+    "description" : "",
+    "versionName" : "1.4.0",
+    "versionCode" : "100",
+    "transformPx" : false,
+    /* 5+App特有相关 */
+    "app-plus" : {
+        "safearea" : {
+            "background" : "#CCCCCC",
+            "bottom" : {
+                "offset" : "auto"
+            }
+        },
+        "usingComponents" : true,
+        "nvueStyleCompiler" : "uni-app",
+        "compilerVersion" : 3,
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : true,
+            "waiting" : true,
+            "autoclose" : true,
+            "delay" : 0
+        },
+        /* 模块配置 */
+        "modules" : {
+            "Maps" : {}
+        },
+        /* 应用发布信息 */
+        "distribute" : {
+            /* android打包配置 */
+            "android" : {
+                "permissions" : [
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_LOCATION_EXTRA_COMMANDS\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_MOCK_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+                ],
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a", "x86" ]
+            },
+            /* ios打包配置 */
+            "ios" : {},
+            /* SDK配置 */
+            "sdkConfigs" : {
+                "ad" : {},
+                "oauth" : {},
+                "push" : {},
+                "maps" : {
+                    "amap" : {
+                        "appkey_ios" : "",
+                        "appkey_android" : "a6432d106a23191ace3e6bee31ee8b53"
+                    }
+                }
+            },
+            "icons" : {
+                "ios" : {
+                    "iphone" : {
+                        "app@3x" : "/Users/apple/Downloads/福来来实训/福来来UI设计图V1.0/icon180*180.png",
+                        "app@2x" : "/Users/apple/Downloads/福来来实训/福来来UI设计图V1.0/icon120*120.png"
+                    },
+                    "appstore" : "/Users/apple/Downloads/福来来实训/福来来UI设计图V1.0/icon.png"
+                },
+                "android" : {
+                    "hdpi" : "/Users/apple/Downloads/福来来实训/福来来UI设计图V1.0/icon72*72.png",
+                    "xhdpi" : "/Users/apple/Downloads/福来来实训/福来来UI设计图V1.0/icon96*96.png",
+                    "xxhdpi" : "/Users/apple/Downloads/福来来实训/福来来UI设计图V1.0/icon144*144.png",
+                    "xxxhdpi" : "/Users/apple/Downloads/福来来实训/福来来UI设计图V1.0/icon192*192.png"
+                }
+            }
+        }
+    },
+    /* 快应用特有相关 */
+    "quickapp" : {},
+    /* 小程序特有相关 */
+    "mp-weixin" : {
+        "appid" : "",
+        "setting" : {
+            "urlCheck" : false
+        },
+        "usingComponents" : true
+    },
+    "mp-alipay" : {
+        "usingComponents" : true
+    },
+    "mp-baidu" : {
+        "usingComponents" : true
+    },
+    "mp-toutiao" : {
+        "usingComponents" : true
+    },
+    "uniStatistics" : {
+        "enable" : false
+    },
+    "h5" : {
+        "devServer" : {
+            "https" : false, // 是否启用 https 协议，默认false
+
+            //"port": 8080, // 本地端口号
+            "disableHostCheck" : true, // 禁用 Host 检查，默认false
+            "proxy" : {
+                // 代理配置
+                "/api" : {
+                    "target" : "http://106.14.169.149:8081", // 目标接口域名
+                    "changeOrigin" : true, // 是否跨域
+                    "secure" : true, // 是否支持https协议的代理
+                    "pathRewrite" : {
+                        "^/api" : "/"
+                    } // 这个一定要加,意思就是把你项目中一dev开头的接口自动替换为 target + pathRewrite第二个参数来进行数据的请求(pathRewrite没有第二个参数的话直接为target)
+                }
+            }
+        }
+    },
+    "vueVersion" : "2"
+}

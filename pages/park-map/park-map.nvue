@@ -1,0 +1,122 @@
+<template>
+	<view>
+		<view>
+			<map id="map" :style="mapStyle" :latitude="latitude" :longitude="longitude" :markers="covers"
+				:show-location="true" @markertap="showCover">
+				<cover-image @click="back" class="back-img" src="../../static/images/other/back.png"></cover-image>
+				<cover-view class="cover" :style="{width:mapStyle.width}" @click="to()">
+				</cover-view>
+			</map>
+		</view>
+	</view>
+</template>
+
+<script>
+	import {
+		parkList
+	} from "@/api/parking/index.js"
+	import {
+		openMap
+	} from "./open-map.js"
+	export default {
+		data() {
+			return {
+				id: 0,
+				title: 'map',
+				mapStyle: {
+					height: '0',
+					width: '100%'
+				},
+				// 初始化位置
+				latitude: 32.125683,
+				longitude: 118.949635,
+				covers: [],
+				currentMarker: {
+					"id": 0,
+					"latitude": 32.125683,
+					"longitude": 118.949635,
+					"title": "123123"
+				},
+			}
+		},
+		mounted() {
+			uni.getSystemInfo({
+				success: (res) => {
+					this.mapStyle = {
+						height: res.windowHeight + 'px',
+						width: res.windowWidth + 'px',
+					}
+				}
+			})
+			uni.getLocation({
+				type: 'gcj02',
+				geocode: true,
+				success: (res) => {
+					this.latitude = res.latitude
+					this.longitude = res.longitude
+					this.init()
+				},
+				fail: () => {
+					uni.showToast({
+						title: '获取地址失败，将导致部分功能不可用',
+						icon: 'none'
+					});
+				}
+			});
+		},
+		methods: {
+			init() {
+				let position = {
+					"longitude": this.longitude,
+					"latitude": this.latitude
+				}
+				parkList(position).then((res) => {
+					let covers = res.data.map((i) => {
+						let position = {
+							id: i.parkingId,
+							latitude: i.latitude,
+							longitude: i.longitude,
+							title: i.communityName,
+							width: 30,
+							height: 30,
+							iconPath: '../../static/images/other/location.png',
+							callout: {
+								content: i.communityName,
+								padding: 10
+							}
+						}
+						return position
+					})
+					this.covers = covers
+				})
+			},
+			back() {
+				uni.navigateBack()
+			},
+			to(latitude, longitude, title) {
+				openMap(latitude, longitude, title)
+			},
+			showCover(e) {
+				let marker = this.covers.filter(i => i.id === e.detail.markerId)
+				this.to(marker[0].latitude, marker[0].longitude, marker[0].title)
+			}
+		}
+	}
+</script>
+
+<style>
+	.back-img {
+		width: 50rpx;
+		height: 50rpx;
+		margin-top: 104rpx;
+		margin-left: 30rpx;
+	}
+
+	.cover {
+		display: flex;
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		z-index: 100;
+	}
+</style>
